@@ -59,17 +59,22 @@ public class BookDatabaseApp {
 					break;
 				
 				case 2:  // look up a book by sku
-					System.out.println("Enter the sku of the book you want to look up: ");
-					skuToLookup = scanner.nextLine(); // get the sku
-					selectedBook = lookUpBookBySku(skuToLookup, bookList);
-					
-					// display the details, I think it could be too much data to fit on one line
-					System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR: %s\nDESCRIPTION: %s\nPRICE: $%.2f\n",
-							selectedBook.getSku(),
-							selectedBook.getTitle(),
-							selectedBook.getAuthor(),
-							selectedBook.getDescription(),
-							selectedBook.getPrice());
+					if(bookList.isEmpty()) { // don't allow a look up if there are no books
+						System.out.println("Please add at least one book");
+					} else {
+						System.out.println("Enter the sku of the book you want to look up: ");
+						skuToLookup = scanner.nextLine(); // get the sku
+						selectedBook = lookUpBookBySku(skuToLookup, bookList);
+						
+						// display the details, I think it could be too much data to fit on one line
+						System.out.println("BOOK DETAILS: ");
+						System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR: %s\nDESCRIPTION: %s\nPRICE: $%.2f\n",
+								selectedBook.getSku(),
+								selectedBook.getTitle(),
+								selectedBook.getAuthor(),
+								selectedBook.getDescription(),
+								selectedBook.getPrice());
+					}
 					break;
 					
 				case 3: // quit the program
