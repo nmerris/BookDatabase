@@ -5,9 +5,6 @@ package coolpackage;
  *
  */
 public class Book {
-
-
-
 	private String sku;
 	private String title;
 	private String author;
@@ -22,7 +19,6 @@ public class Book {
 		this.description = description;
 		this.price = price;
 	}
-
 	
 
 	/**
