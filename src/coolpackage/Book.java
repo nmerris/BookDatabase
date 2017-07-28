@@ -64,8 +64,9 @@ public class Book {
 		for(String s : authorList) {
 			authors += s;
 //			if(s.i)
-			authors += "   ";
+			authors += ", ";
 		}
+		
 		return authors;
 	}
 
