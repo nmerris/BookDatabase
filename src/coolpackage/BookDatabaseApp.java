@@ -14,7 +14,9 @@ public class BookDatabaseApp {
 		boolean quit = false; // true if user wants to quit
 		String skuToLookup; // the sku to look up
 		Book selectedBook; // the book that corresponds to skuToLookup
-		int menuChoice;
+		int menuChoice; // users menu selction
+		boolean continueAddingAuthors = false;
+		List<String> authorList = new ArrayList<String>(); // book can have multiple authors
 		
 		// want to set an upper limit on price so as not to exceed doubles range
 		final double maxPrice = 100000000; // does any book cost more than a 100 million dollars?
@@ -41,19 +43,26 @@ public class BookDatabaseApp {
 					System.out.println("Enter title: ");
 					String title = scanner.nextLine();
 					
-					System.out.println("Enter author: ");
-					String author = scanner.nextLine();
+					// user can enter multiple authors
+					int counter = 1;
+					do {
+						System.out.printf("Enter author %d: ", counter);
+						authorList.add(scanner.nextLine());
+						counter++;
+						
+						System.out.println("Add another author? (Y/N)");
+						continueAddingAuthors = scanner.nextLine().equalsIgnoreCase("y") ? true : false;
+						
+					} while(continueAddingAuthors);
+					
 					
 					System.out.println("Enter description: ");
 					String descr = scanner.nextLine();
-					
-//					System.out.println("Enter price: ");
-//					double price = scanner.nextDouble();
-//					scanner.nextLine(); 
+	
 					double price = getPrice(scanner, maxPrice);
 					
 					// create a Book, add it to the list
-					bookList.add(new Book(sku, title, author, descr, price));
+					bookList.add(new Book(sku, title, authorList, descr, price));
 					
 					// TODO: provide user feedback if addition was successful or not
 					break;
@@ -81,7 +90,6 @@ public class BookDatabaseApp {
 					System.out.println("Thank you, come again.");
 					quit = true;
 					break;
-				
 				
 			} // switch
 			

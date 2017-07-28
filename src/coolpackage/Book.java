@@ -1,5 +1,8 @@
 package coolpackage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Nathan Merris
  *
@@ -7,15 +10,15 @@ package coolpackage;
 public class Book {
 	private String sku;
 	private String title;
-	private String author;
+	private List<String> authorList = new ArrayList<String>();
 	private String description;
 	private double price;
 	
 	
-	public Book(String sku, String title, String author, String description, double price) {
+	public Book(String sku, String title, List<String> authorList, String description, double price) {
 		this.sku = sku;
 		this.title = title;
-		this.author = author;
+		this.authorList = authorList;
 		this.description = description;
 		this.price = price;
 	}
@@ -54,18 +57,24 @@ public class Book {
 
 
 	/**
-	 * @return the author
+	 * @return the author(s)
 	 */
 	public String getAuthor() {
-		return author;
+		String authors = "";
+		for(String s : authorList) {
+			authors += s;
+//			if(s.i)
+			authors += "   ";
+		}
+		return authors;
 	}
 
 
 	/**
-	 * @param author the author to set
+	 * @param author the author(s) to set
 	 */
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthorList(List<String> authorList) {
+		this.authorList = authorList;
 	}
 
 
