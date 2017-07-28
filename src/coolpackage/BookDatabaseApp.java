@@ -16,6 +16,9 @@ public class BookDatabaseApp {
 		Book selectedBook; // the book that corresponds to skuToLookup
 		int menuChoice;
 		
+		// want to set an upper limit on price so as not to exceed doubles range
+		final double maxPrice = 100000000; // does any book cost more than a 100 million dollars?
+		
 	
 		
 		
@@ -44,9 +47,10 @@ public class BookDatabaseApp {
 					System.out.println("Enter description: ");
 					String descr = scanner.nextLine();
 					
-					System.out.println("Enter price: ");
-					double price = scanner.nextDouble();
-					scanner.nextLine(); 
+//					System.out.println("Enter price: ");
+//					double price = scanner.nextDouble();
+//					scanner.nextLine(); 
+					double price = getPrice(scanner, maxPrice);
 					
 					// create a Book, add it to the list
 					bookList.add(new Book(sku, title, author, descr, price));
@@ -60,7 +64,7 @@ public class BookDatabaseApp {
 					selectedBook = lookUpBookBySku(skuToLookup, bookList);
 					
 					// display the details, I think it could be too much data to fit on one line
-					System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR: %s\nDESCRIPTION: %s\nPRICE: %f\n",
+					System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR: %s\nDESCRIPTION: %s\nPRICE: $%.2f\n",
 							selectedBook.getSku(),
 							selectedBook.getTitle(),
 							selectedBook.getAuthor(),
@@ -92,6 +96,39 @@ public class BookDatabaseApp {
 			}
 		}
 		return null; // return null if no books found with given sku
+	}
+	
+	
+	/**
+	 * Gets the price from Scanner.
+	 * Validates: price too high, less than 0, not a number
+	 * 
+	 * @param scanner System input for the whole app
+	 * @param maxPrice Max allowed
+	 * @return Validated price
+	 */
+	private static double getPrice(Scanner scanner, double maxPrice) {
+		boolean inputError = false; // true if user enters invalid input
+		double price = 0;
+		
+		do {
+			try { // get price and make sure it's a number not greater than maxPrice
+				inputError = false;
+				System.out.println("Enter price: ");
+				price = scanner.nextDouble();
+				if(price > maxPrice || price < 0) { // user entered number that was too large
+					throw new Exception();
+				}
+				scanner.nextLine(); // Scanner is kind of annoying
+				
+			} catch(Exception e) { // user did not enter a number
+				scanner.nextLine(); // consume the dangling \n or it loops forever
+				inputError = true;
+				System.out.printf("Please enter a positive number less than %.2f\n", maxPrice);
+			};
+		} while(inputError);
+		
+		return price;
 	}
 	
 	
