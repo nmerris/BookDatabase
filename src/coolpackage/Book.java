@@ -10,17 +10,25 @@ import java.util.List;
 public class Book {
 	private String sku;
 	private String title;
-	private List<String> authorList = new ArrayList<String>();
+	private List<String> authorList;
 	private String description;
 	private double price;
 	
 	
-	public Book(String sku, String title, List<String> authorList, String description, double price) {
-		this.sku = sku;
-		this.title = title;
-		this.authorList = authorList;
-		this.description = description;
-		this.price = price;
+//	public Book(String sku, String title, List<String> authorList, String description, double price) {
+//		this.sku = sku;
+//		this.title = title;
+//		this.authorList = authorList;
+//		this.description = description;
+//		this.price = price;
+//	}
+	
+	public Book() {
+		sku = "";
+		title = "";
+		description = "";
+		price = 0;
+		authorList = new ArrayList<String>();
 	}
 	
 
@@ -57,26 +65,35 @@ public class Book {
 
 
 	/**
-	 * @return the author(s)
+	 * @return the author(s) as a comma separated String
 	 */
-	public String getAuthor() {
+	public String getAuthorString() {
 		String authors = "";
 		for(String s : authorList) {
 			authors += s;
-//			if(s.i)
 			authors += ", ";
 		}
 		
-		return authors;
+		// remove the last ", "
+		return authors.substring(0, authors.length() - 2);
+	}
+	
+	public List<String> getAuthorList() {
+		return authorList;
+	}
+	
+	
+	public void addAuthor(String author) {
+		authorList.add(author);
 	}
 
 
 	/**
 	 * @param author the author(s) to set
 	 */
-	public void setAuthorList(List<String> authorList) {
-		this.authorList = authorList;
-	}
+//	public void setAuthorList(List<String> authorList) {
+//		this.authorList = authorList;
+//	}
 
 
 	/**
