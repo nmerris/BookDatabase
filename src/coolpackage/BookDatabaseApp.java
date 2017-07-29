@@ -10,19 +10,13 @@ public class BookDatabaseApp {
 
 		Scanner scanner = new Scanner(System.in);
 		List<Book> bookList = new ArrayList<Book>(); // our simulated book db
-//		final int numBooksToCreate = 100;
-		boolean quit = false; // true if user wants to quit
-//		String skuToLookup; // the sku to look up
+		boolean quit = false; // true if user wants to quit this program
 		Book selectedBook; // the book that corresponds to skuToLookup
 		int menuChoice; // users menu selction
 		boolean continueAddingAuthors = false;
-//		List<String> authorList = new ArrayList<String>(); // book can have multiple authors
 		
 		// want to set an upper limit on price so as not to exceed doubles range
 		final double maxPrice = 100000000; // does any book cost more than a 100 million dollars?
-		
-	
-		
 		
 		
 		do {
@@ -40,33 +34,28 @@ public class BookDatabaseApp {
 					// create a new empty Book object
 					Book currentBook = new Book();
 					
-					System.out.println("Enter sku: ");
-//					String sku = scanner.nextLine();
+					System.out.print("Enter sku: ");
 					currentBook.setSku(scanner.nextLine());
 					
-					System.out.println("Enter title: ");
-//					String title = scanner.nextLine();
+					System.out.print("Enter title: ");
 					currentBook.setTitle(scanner.nextLine());
 					
 					// user can enter multiple authors
 					int counter = 1;
 					do {
 						System.out.printf("Enter author %d: ", counter);
-//						authorList.add(scanner.nextLine());
 						currentBook.addAuthor(scanner.nextLine());
 						counter++;
 						
-						System.out.println("Add another author? (Y/N)");
+						System.out.print("Add another author? (Y/N) ");
 						continueAddingAuthors = scanner.nextLine().equalsIgnoreCase("y") ? true : false;
 						
 					} while(continueAddingAuthors);
 					
 					
-					System.out.println("Enter description: ");
-//					String descr = scanner.nextLine();
+					System.out.print("Enter description: ");
 					currentBook.setDescription(scanner.nextLine());
 	
-//					double price = getPrice(scanner, maxPrice);
 					currentBook.setPrice(getPrice(scanner, maxPrice));
 					
 					// add currentBook to the list
@@ -80,7 +69,6 @@ public class BookDatabaseApp {
 						System.out.println("Please add at least one book");
 					} else {
 						System.out.println("Enter the sku of the book you want to look up: ");
-//						skuToLookup = scanner.nextLine(); // get the sku
 						selectedBook = lookUpBookBySku(scanner.nextLine(), bookList);
 						
 						// TODO: provide feedback if book was not found
@@ -137,7 +125,7 @@ public class BookDatabaseApp {
 		do {
 			try { // get price and make sure it's a number not greater than maxPrice
 				inputError = false;
-				System.out.println("Enter price: ");
+				System.out.print("Enter price: ");
 				price = scanner.nextDouble();
 				if(price > maxPrice || price < 0) { // user entered number that was too large
 					throw new Exception();

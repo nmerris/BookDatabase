@@ -13,17 +13,10 @@ public class Book {
 	private List<String> authorList;
 	private String description;
 	private double price;
-	
-	
-//	public Book(String sku, String title, List<String> authorList, String description, double price) {
-//		this.sku = sku;
-//		this.title = title;
-//		this.authorList = authorList;
-//		this.description = description;
-//		this.price = price;
-//	}
+
 	
 	public Book() {
+		// initialize all the fields
 		sku = "";
 		title = "";
 		description = "";
@@ -86,14 +79,6 @@ public class Book {
 	public void addAuthor(String author) {
 		authorList.add(author);
 	}
-
-
-	/**
-	 * @param author the author(s) to set
-	 */
-//	public void setAuthorList(List<String> authorList) {
-//		this.authorList = authorList;
-//	}
 
 
 	/**
