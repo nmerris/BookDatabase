@@ -56,7 +56,7 @@ public class BookDatabaseApp {
 					System.out.print("Enter description: ");
 					currentBook.setDescription(scanner.nextLine());
 	
-					currentBook.setPrice(getPrice(scanner, maxPrice));
+					currentBook.setPrice(getPriceFromUser(scanner, maxPrice));
 					
 					// add currentBook to the list
 					bookList.add(currentBook);
@@ -118,7 +118,7 @@ public class BookDatabaseApp {
 	 * @param maxPrice Max allowed
 	 * @return Validated price
 	 */
-	private static double getPrice(Scanner scanner, double maxPrice) {
+	private static double getPriceFromUser(Scanner scanner, double maxPrice) {
 		boolean inputError = false; // true if user enters invalid input
 		double price = 0;
 		
