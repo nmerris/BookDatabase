@@ -93,13 +93,21 @@ public class BookDatabaseApp {
 						System.out.print("Enter an author of the book you want to look up: ");
 						bookListWithGivenAuthor = lookUpBookByAuthor(scanner.nextLine(), bookList);
 						
-						// TODO: provide feedback if book was not found
-						
-						// display the details
-						for(Book b : bookListWithGivenAuthor) {
+						if(bookListWithGivenAuthor.size() == 0) { // no books were found
+							System.out.println("No book was found with that author");
+						} else { // at least one book was found
+							System.out.printf("Found %d book(s)\n", bookListWithGivenAuthor.size());
+							
+							// display the details
+							for(Book b : bookListWithGivenAuthor) {
+								System.out.printf("BOOK %d DETAILS\n", bookListWithGivenAuthor.indexOf(b) + 1);
+								
+							}
 							
 							
 						}
+						
+		
 					
 					
 					
@@ -122,21 +130,22 @@ public class BookDatabaseApp {
 	}
 	
 	
+	// will return an empty list if no books found
 	public static List<Book> lookUpBookByAuthor(String author, List<Book> bookList) {
 		// I am assuming a book would not have the same author listed twice
 		// in a real database, this could be easily enforced
 		List<Book> bookListWithGivenAuthor = new ArrayList<Book>(); // the book(s) with given author
 		
 		for(Book b : bookList) { // iterate through all the books
-			for(String s : b.getAuthorList()) { // iterate through all the author(s) of each book 
-				// using ignore case, maybe user has caps lock on?  err on the side of returning more books
+			List<String> authorList = b.getAuthorList(); // get author list of one book
+			for(String s : authorList) {
+				// using ignorecase, maybe user has caps lock on?  err on the side of returning more books
 				if(s.equalsIgnoreCase(author)) { // check if the author matches
 					bookListWithGivenAuthor.add(b); // add the book to the List we are returning
 				}
 			}
-			return bookListWithGivenAuthor;
 		}
-		return null; // return null if no books found with given author
+		return bookListWithGivenAuthor;
 	}
 	
 	
