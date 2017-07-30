@@ -24,9 +24,9 @@ public class BookDatabaseApp {
 		
 		do {
 			// display menu
-			System.out.println("MENU:");
+			System.out.println("MENU: (Enter one of the following numbers)");
 			System.out.println("1. Add a book to the database");
-			System.out.println("2. Look up a book by sku");
+			System.out.println("2. Look up book by sku");
 			System.out.println("3. Look up book(s) by author");
 			System.out.println("4. Look up book(s) by category");
 			System.out.println("5. Quit");
@@ -70,7 +70,9 @@ public class BookDatabaseApp {
 					// add currentBook to the list
 					bookList.add(currentBook);
 					
-					// TODO: provide user feedback if addition was successful or not (?)
+					// display a confirmation message
+					System.out.println("Successfully added one book");
+					System.out.printf("Book database now contains: %d book(s)\n", bookList.size());
 					break;
 				
 				case 2:  // look up a book by sku
@@ -84,7 +86,7 @@ public class BookDatabaseApp {
 							System.out.println("No book was found with that sku");
 						}
 						else {
-							System.out.println("BOOK DETAILS:");
+							System.out.println("BOOK DETAILS......");
 							displayBookDetails(selectedBook);
 						}
 
@@ -106,7 +108,7 @@ public class BookDatabaseApp {
 							
 							// display the details
 							for(Book b : bookListWithGivenAuthor) {
-								System.out.printf("BOOK %d DETAILS\n", bookListWithGivenAuthor.indexOf(b) + 1);
+								System.out.printf("BOOK %d DETAILS......\n", bookListWithGivenAuthor.indexOf(b) + 1);
 								displayBookDetails(b);
 							}	
 						}
@@ -130,7 +132,7 @@ public class BookDatabaseApp {
 							
 							// display the details
 							for(Book b : bookListWithGivenCategory) {
-								System.out.printf("BOOK %d DETAILS\n", bookListWithGivenCategory.indexOf(b) + 1);
+								System.out.printf("BOOK %d DETAILS......\n", bookListWithGivenCategory.indexOf(b) + 1);
 								displayBookDetails(b);
 							}	
 						}
@@ -267,7 +269,7 @@ public class BookDatabaseApp {
 				
 				boolean foundMatchingCategory = false;
 				for(String s : Book.getAllCategories()) { // iterate through all possible categories
-					if(s.equals(category)) { // user entered a valid category
+					if(s.equalsIgnoreCase(category)) { // user entered a valid category
 						foundMatchingCategory = true;
 					}
 				}
