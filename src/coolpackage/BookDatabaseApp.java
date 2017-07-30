@@ -16,6 +16,7 @@ public class BookDatabaseApp {
 		int menuChoice; // users menu selction
 		boolean continueAddingAuthors = false;
 		
+		
 		// want to set an upper limit on price so as not to exceed doubles range
 		final double maxPrice = 100000000; // does any book cost more than a 100 million dollars?
 		
@@ -57,13 +58,17 @@ public class BookDatabaseApp {
 					
 					System.out.print("Enter description: ");
 					currentBook.setDescription(scanner.nextLine());
-	
+					
+					// for now, user can only enter a single Category
+					currentBook.setCategory(getCategoryFromUser(scanner));
+					
+					
 					currentBook.setPrice(getPriceFromUser(scanner, maxPrice));
 					
 					// add currentBook to the list
 					bookList.add(currentBook);
 					
-					// TODO: provide user feedback if addition was successful or not
+					// TODO: provide user feedback if addition was successful or not (?)
 					break;
 				
 				case 2:  // look up a book by sku
@@ -122,6 +127,18 @@ public class BookDatabaseApp {
 	}
 	
 	
+	public static void displayBookCategories() {
+		String categories = "";
+		for(String s: Book.getAllCategories()) {
+			categories += s;
+			categories += ", ";
+		}
+		
+		// remove the last ", " and display it
+		System.out.println(categories.substring(0,  categories.length() - 2));
+	}
+	
+	
 	public static void displayBookDetails(Book b) {
 		System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR(S): %s\nDESCRIPTION: %s\nPRICE: $%.2f\n",
 				b.getSku(),
@@ -170,7 +187,7 @@ public class BookDatabaseApp {
 	 * @return Validated price
 	 */
 	private static double getPriceFromUser(Scanner scanner, double maxPrice) {
-		boolean inputError = false; // true if user enters invalid input
+		boolean inputError; // true if user enters invalid input
 		double price = 0;
 		
 		do {
@@ -191,6 +208,34 @@ public class BookDatabaseApp {
 		} while(inputError);
 		
 		return price;
+	}
+	
+	
+	private static String getCategoryFromUser(Scanner scanner) {
+		boolean inputError; // true if user enters invalid input
+		String category = "";
+		
+		do {
+			try {
+				inputError = false;
+				System.out.print("Enter one category from the following:");
+				displayBookCategories();
+				category = scanner.nextLine();
+				
+				
+				
+			} catch(Exception e) {
+				inputError = true;
+				System.out.println("Please enter a category exactly as given");
+			};
+			
+			
+		} while(inputError);
+		
+		return category;
+		
+		
+		
 	}
 	
 	

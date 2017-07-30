@@ -8,16 +8,20 @@ import java.util.List;
  *
  */
 public class Book {
+	// a book can have only one of these categories for now
+	// static because we want other classes to be able to see these without create a Book instance
+	private static String[] categories = {
+		"Action", "Romance", "Mystery", "Thriller", "Nonfiction", "Drama", "Comedy", "Horror"
+	};
+	
 	private String sku;
 	private String title;
 	private List<String> authorList;
 	private String description;
 	private double price;
+	private String category; // only one category for now
 	
-	// use an enum because only want a book to have these categories
-	public static enum Category {
-		ACTION, ROMANCE, MYSTERY, THRILLER, NONFICTION, DRAMA, COMEDY
-	}
+
 
 	
 	public Book() {
@@ -115,6 +119,21 @@ public class Book {
 	 */
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	
+	public static String[] getAllCategories() {
+		return categories;
+	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	
