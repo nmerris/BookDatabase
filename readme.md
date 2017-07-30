@@ -1,7 +1,7 @@
 	This program simulates a book database.  The user is presented with
 	a menu to add books, or look up book(s) by various criteria.
 	A book contains the following data: sku, author(s), title, description,
-	and price.
+	category, and price.
 
 
 	SAMPLE OUTPUT>>>>>>>>>>>>>>>>>>>>>>>>>>>>
