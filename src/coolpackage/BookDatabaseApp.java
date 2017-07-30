@@ -68,7 +68,7 @@ public class BookDatabaseApp {
 					if(bookList.isEmpty()) { // don't allow a look up if there are no books
 						System.out.println("Please add at least one book");
 					} else {
-						System.out.println("Enter the sku of the book you want to look up: ");
+						System.out.print("Enter the sku of the book you want to look up: ");
 						selectedBook = lookUpBookBySku(scanner.nextLine(), bookList);
 						
 						// TODO: provide feedback if book was not found
@@ -84,7 +84,19 @@ public class BookDatabaseApp {
 					}
 					break;
 					
-				case 3: // quit the program
+				case 3: // look up book(s) by author
+					if(bookList.isEmpty()) { // don't allow a look up if there are no books
+						System.out.println("Please add at least one book");
+					} else {
+						System.out.print("Enter an author of the book you want to look up: ");
+						
+					
+					
+					
+					}
+					break;
+					
+				case 4: // quit the program
 					System.out.println("Thank you, come again.");
 					quit = true;
 					break;
