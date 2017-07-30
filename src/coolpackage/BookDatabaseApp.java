@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This program simulates a book database.  The user is presented with
+ * a menu to add books, or look up book(s) by various criteria.
+ * A book contains the following data: sku, author(s), title, description,
+ * and price.
+ * 
+ * @author Nathan Merris
+ *
+ */
 public class BookDatabaseApp {
 
 	public static void main(String[] args) {
@@ -22,7 +31,7 @@ public class BookDatabaseApp {
 		final double maxPrice = 100000000; // does any book cost more than a 100 million dollars?
 		
 		
-		do {
+		do { // continue until user chooses to quit
 			// display menu
 			System.out.println("MENU: (Enter one of the following numbers)");
 			System.out.println("1. Add a book to the database");
@@ -64,7 +73,6 @@ public class BookDatabaseApp {
 					// for now, user can only enter a single Category
 					currentBook.setCategory(getCategoryFromUser(scanner));
 					
-					
 					currentBook.setPrice(getPriceFromUser(scanner, maxPrice));
 					
 					// add currentBook to the list
@@ -89,7 +97,6 @@ public class BookDatabaseApp {
 							System.out.println("BOOK DETAILS......");
 							displayBookDetails(selectedBook);
 						}
-
 					}
 					break;
 					
@@ -116,7 +123,7 @@ public class BookDatabaseApp {
 					break;
 					
 				case 4: // look up book(s) by category
-					if(bookList.isEmpty()) {
+					if(bookList.isEmpty()) { // don't allow a look up if there are no books
 						System.out.println("Please add at least one book");
 					}
 					else {
@@ -136,7 +143,6 @@ public class BookDatabaseApp {
 								displayBookDetails(b);
 							}	
 						}
-						
 					}
 					break;
 					
@@ -159,6 +165,9 @@ public class BookDatabaseApp {
 
 
 
+	/**
+	 *  Displays a comma separated list of book categories on a single line.
+	 */
 	public static void displayBookCategories() {
 		String categories = "";
 		for(String s: Book.getAllCategories()) {
@@ -171,6 +180,11 @@ public class BookDatabaseApp {
 	}
 	
 	
+	/**
+	 * Displays a books details on consecutive lines.
+	 * 
+	 * @param b the book to display the details of
+	 */
 	public static void displayBookDetails(Book b) {
 		System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR(S): %s\nDESCRIPTION: %s\nPRICE: $%.2f\n",
 				b.getSku(),
@@ -181,7 +195,16 @@ public class BookDatabaseApp {
 	}
 	
 	
-	// will return an empty list if no books found
+	/**
+	 * Searches the entire book db for book(s) that have matching category.
+	 * May be zero matches, which is ok.  category should be from Book.categories,
+	 * but this method checks for that, and if user enters an invalid category,
+	 * an error message is displayed, then user is asked again.  Case does not matter.
+	 * 
+	 * @param category the category to search
+	 * @param bookList the simulated book database contained in this class
+	 * @return a new list of books that match category, may be zero length
+	 */
 	private static List<Book> lookUpBookByCategory(String category, List<Book> bookList) {
 		List<Book> bookListWithGivenCategory = new ArrayList<Book>(); // the book(s) with given category
 		
@@ -194,7 +217,14 @@ public class BookDatabaseApp {
 	}
 	
 	
-	// will return an empty list if no books found
+	/**
+	 * Searches the entire book db for book(s) that have matching author.
+	 * May be zero matches, which is ok.  Case does not matter.
+	 * 
+	 * @param author the author you want to search for
+	 * @param bookList the simulated book database contained in this class
+	 * @return a new list of books that match author, may be zero length
+	 */
 	public static List<Book> lookUpBookByAuthor(String author, List<Book> bookList) {
 		// I am assuming a book would not have the same author listed twice
 		// in a real database, this could be easily enforced
@@ -213,6 +243,14 @@ public class BookDatabaseApp {
 	}
 	
 	
+	/**
+	 * Search the db for a book that matches sku.  All books should have a single
+	 * unique sku.  Uniqueness is not enforced at this time.  Case DOES matter here.
+	 * 
+	 * @param sku the sku to lookup, skus are unique
+	 * @param bookList the simulated book database contained in this class
+	 * @return a single book that matches sku, or null if no match is found
+	 */
 	public static Book lookUpBookBySku(String sku, List<Book> bookList) {
 		for(Book b : bookList) {
 			if(b.getSku().equals(sku)) { // found the book
@@ -229,7 +267,7 @@ public class BookDatabaseApp {
 	 * 
 	 * @param scanner System input for the whole app
 	 * @param maxPrice Max allowed
-	 * @return Validated price
+	 * @return validated price
 	 */
 	private static double getPriceFromUser(Scanner scanner, double maxPrice) {
 		boolean inputError; // true if user enters invalid input
@@ -256,6 +294,14 @@ public class BookDatabaseApp {
 	}
 	
 	
+	/**
+	 * Gets a category from the user.  Category is checked to make sure it
+	 * matches one from Book.categories.  An error message is displayed if
+	 * this is not so, and user is asked to try again.  Case does not matter.
+	 * 
+	 * @param scanner System input for the whole app
+	 * @return a category that matches anything in Book.categories
+	 */
 	private static String getCategoryFromUser(Scanner scanner) {
 		boolean inputError; // true if user enters invalid input
 		String category = "";
