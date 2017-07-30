@@ -12,6 +12,7 @@ public class BookDatabaseApp {
 		List<Book> bookList = new ArrayList<Book>(); // our simulated book db
 		boolean quit = false; // true if user wants to quit this program
 		Book selectedBook; // the book that corresponds to skuToLookup
+		List<Book> bookListWithGivenAuthor = new ArrayList<Book>(); // book(s) with a given author
 		int menuChoice; // users menu selction
 		boolean continueAddingAuthors = false;
 		
@@ -24,7 +25,8 @@ public class BookDatabaseApp {
 			System.out.println("MENU:");
 			System.out.println("1. Add a book to the database");
 			System.out.println("2. Look up a book by sku");
-			System.out.println("3. Quit");
+			System.out.println("3. Look up book(s) by author");
+			System.out.println("4. Quit");
 			menuChoice = scanner.nextInt(); // get the user menu choice
 			scanner.nextLine(); // consume the dangling \n
 			
@@ -89,7 +91,15 @@ public class BookDatabaseApp {
 						System.out.println("Please add at least one book");
 					} else {
 						System.out.print("Enter an author of the book you want to look up: ");
+						bookListWithGivenAuthor = lookUpBookByAuthor(scanner.nextLine(), bookList);
 						
+						// TODO: provide feedback if book was not found
+						
+						// display the details
+						for(Book b : bookListWithGivenAuthor) {
+							
+							
+						}
 					
 					
 					
@@ -109,6 +119,24 @@ public class BookDatabaseApp {
 		} while(!quit);
 		
 
+	}
+	
+	
+	public static List<Book> lookUpBookByAuthor(String author, List<Book> bookList) {
+		// I am assuming a book would not have the same author listed twice
+		// in a real database, this could be easily enforced
+		List<Book> bookListWithGivenAuthor = new ArrayList<Book>(); // the book(s) with given author
+		
+		for(Book b : bookList) { // iterate through all the books
+			for(String s : b.getAuthorList()) { // iterate through all the author(s) of each book 
+				// using ignore case, maybe user has caps lock on?  err on the side of returning more books
+				if(s.equalsIgnoreCase(author)) { // check if the author matches
+					bookListWithGivenAuthor.add(b); // add the book to the List we are returning
+				}
+			}
+			return bookListWithGivenAuthor;
+		}
+		return null; // return null if no books found with given author
 	}
 	
 	
