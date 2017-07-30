@@ -77,12 +77,8 @@ public class BookDatabaseApp {
 						
 						// display the details, I think it could be too much data to fit on one line
 						System.out.println("BOOK DETAILS:");
-						System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR(S): %s\nDESCRIPTION: %s\nPRICE: $%.2f\n",
-								selectedBook.getSku(),
-								selectedBook.getTitle(),
-								selectedBook.getAuthorString(),
-								selectedBook.getDescription(),
-								selectedBook.getPrice());
+						displayBookDetails(selectedBook);
+
 					}
 					break;
 					
@@ -91,6 +87,7 @@ public class BookDatabaseApp {
 						System.out.println("Please add at least one book");
 					} else {
 						System.out.print("Enter an author of the book you want to look up: ");
+						// get book(s) with given author
 						bookListWithGivenAuthor = lookUpBookByAuthor(scanner.nextLine(), bookList);
 						
 						if(bookListWithGivenAuthor.size() == 0) { // no books were found
@@ -101,16 +98,9 @@ public class BookDatabaseApp {
 							// display the details
 							for(Book b : bookListWithGivenAuthor) {
 								System.out.printf("BOOK %d DETAILS\n", bookListWithGivenAuthor.indexOf(b) + 1);
-								
-							}
-							
-							
+								displayBookDetails(b);
+							}	
 						}
-						
-		
-					
-					
-					
 					}
 					break;
 					
@@ -127,6 +117,16 @@ public class BookDatabaseApp {
 		} while(!quit);
 		
 
+	}
+	
+	
+	public static void displayBookDetails(Book b) {
+		System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR(S): %s\nDESCRIPTION: %s\nPRICE: $%.2f\n",
+				b.getSku(),
+				b.getTitle(),
+				b.getAuthorString(),
+				b.getDescription(),
+				b.getPrice());
 	}
 	
 	
