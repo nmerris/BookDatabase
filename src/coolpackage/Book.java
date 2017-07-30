@@ -13,6 +13,11 @@ public class Book {
 	private List<String> authorList;
 	private String description;
 	private double price;
+	
+	// use an enum because only want a book to have these categories
+	public static enum Category {
+		ACTION, ROMANCE, MYSTERY, THRILLER, NONFICTION, DRAMA, COMEDY
+	}
 
 	
 	public Book() {
