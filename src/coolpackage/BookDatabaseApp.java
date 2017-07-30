@@ -218,10 +218,20 @@ public class BookDatabaseApp {
 		do {
 			try {
 				inputError = false;
-				System.out.print("Enter one category from the following:");
+				System.out.println("Enter one category from the following:");
 				displayBookCategories();
-				category = scanner.nextLine();
+				category = scanner.nextLine(); // get user entry for category
 				
+				boolean foundMatchingCategory = false;
+				for(String s : Book.getAllCategories()) { // iterate through all possible categories
+					if(s.equals(category)) { // user entered a valid category
+						foundMatchingCategory = true;
+					}
+				}
+				
+				if(!foundMatchingCategory) { // user did not enter a valid category
+					throw new Exception();
+				}
 				
 				
 			} catch(Exception e) {
