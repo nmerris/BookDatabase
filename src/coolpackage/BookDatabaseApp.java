@@ -13,6 +13,7 @@ public class BookDatabaseApp {
 		boolean quit = false; // true if user wants to quit this program
 		Book selectedBook; // the book that corresponds to skuToLookup
 		List<Book> bookListWithGivenAuthor = new ArrayList<Book>(); // book(s) with a given author
+		List<Book> bookListWithGivenCategory = new ArrayList<Book>(); // book(s) with a given category
 		int menuChoice; // users menu selction
 		boolean continueAddingAuthors = false;
 		
@@ -27,7 +28,8 @@ public class BookDatabaseApp {
 			System.out.println("1. Add a book to the database");
 			System.out.println("2. Look up a book by sku");
 			System.out.println("3. Look up book(s) by author");
-			System.out.println("4. Quit");
+			System.out.println("4. Look up book(s) by category");
+			System.out.println("5. Quit");
 			menuChoice = scanner.nextInt(); // get the user menu choice
 			scanner.nextLine(); // consume the dangling \n
 			
@@ -93,7 +95,7 @@ public class BookDatabaseApp {
 					if(bookList.isEmpty()) { // don't allow a look up if there are no books
 						System.out.println("Please add at least one book");
 					} else {
-						System.out.print("Enter an author of the book you want to look up: ");
+						System.out.print("Enter an author of the book(s) you want to look up: ");
 						// get book(s) with given author
 						bookListWithGivenAuthor = lookUpBookByAuthor(scanner.nextLine(), bookList);
 						
@@ -111,7 +113,30 @@ public class BookDatabaseApp {
 					}
 					break;
 					
-				case 4: // quit the program
+				case 4: // look up book(s) by category
+					if(bookList.isEmpty()) {
+						System.out.println("Please add at least one book");
+					}
+					else {
+						System.out.print("Enter a category of the book(s) you want to look up: ");
+						bookListWithGivenCategory = lookUpBookByCategory(scanner.nextLine(), bookList);
+						
+						if(bookListWithGivenCategory.size() == 0) { // no books were found
+							System.out.println("No book was found with that category");
+						} else { // at least one book was found
+							System.out.printf("Found %d book(s)\n", bookListWithGivenCategory.size());
+							
+							// display the details
+							for(Book b : bookListWithGivenCategory) {
+								System.out.printf("BOOK %d DETAILS\n", bookListWithGivenAuthor.indexOf(b) + 1);
+								displayBookDetails(b);
+							}	
+						}
+						
+					}
+					break;
+					
+				case 5: // quit the program
 					System.out.println("Thank you, come again.");
 					quit = true;
 					break;
@@ -233,16 +258,13 @@ public class BookDatabaseApp {
 					throw new Exception();
 				}
 				
-				
 			} catch(Exception e) {
 				inputError = true;
 				System.out.println("Please enter a category exactly as given");
 			};
-			
-			
 		} while(inputError);
 		
-		return category;
+		return category; // only possible to get here if a valid category was entered
 		
 		
 		
