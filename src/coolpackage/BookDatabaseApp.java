@@ -73,11 +73,13 @@ public class BookDatabaseApp {
 						System.out.print("Enter the sku of the book you want to look up: ");
 						selectedBook = lookUpBookBySku(scanner.nextLine(), bookList);
 						
-						// TODO: provide feedback if book was not found
-						
-						// display the details, I think it could be too much data to fit on one line
-						System.out.println("BOOK DETAILS:");
-						displayBookDetails(selectedBook);
+						if(selectedBook == null) {
+							System.out.println("No book was found with that sku");
+						}
+						else {
+							System.out.println("BOOK DETAILS:");
+							displayBookDetails(selectedBook);
+						}
 
 					}
 					break;
