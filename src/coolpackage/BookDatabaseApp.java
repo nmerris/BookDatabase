@@ -119,7 +119,9 @@ public class BookDatabaseApp {
 					}
 					else {
 						System.out.print("Enter a category of the book(s) you want to look up: ");
-						bookListWithGivenCategory = lookUpBookByCategory(scanner.nextLine(), bookList);
+						
+						bookListWithGivenCategory = 
+								lookUpBookByCategory(getCategoryFromUser(scanner), bookList);
 						
 						if(bookListWithGivenCategory.size() == 0) { // no books were found
 							System.out.println("No book was found with that category");
@@ -128,7 +130,7 @@ public class BookDatabaseApp {
 							
 							// display the details
 							for(Book b : bookListWithGivenCategory) {
-								System.out.printf("BOOK %d DETAILS\n", bookListWithGivenAuthor.indexOf(b) + 1);
+								System.out.printf("BOOK %d DETAILS\n", bookListWithGivenCategory.indexOf(b) + 1);
 								displayBookDetails(b);
 							}	
 						}
@@ -152,6 +154,9 @@ public class BookDatabaseApp {
 	}
 	
 	
+
+
+
 	public static void displayBookCategories() {
 		String categories = "";
 		for(String s: Book.getAllCategories()) {
@@ -171,6 +176,19 @@ public class BookDatabaseApp {
 				b.getAuthorString(),
 				b.getDescription(),
 				b.getPrice());
+	}
+	
+	
+	// will return an empty list if no books found
+	private static List<Book> lookUpBookByCategory(String category, List<Book> bookList) {
+		List<Book> bookListWithGivenCategory = new ArrayList<Book>(); // the book(s) with given category
+		
+		for(Book b : bookList) {
+			if(b.getCategory().equalsIgnoreCase(category)) { // found a book with given category
+				bookListWithGivenCategory.add(b); // add it to the list to return
+			}
+		}
+		return bookListWithGivenCategory;
 	}
 	
 	
@@ -218,7 +236,7 @@ public class BookDatabaseApp {
 		do {
 			try { // get price and make sure it's a number not greater than maxPrice
 				inputError = false;
-				System.out.print("Enter price: ");
+				System.out.print("Enter price: $");
 				price = scanner.nextDouble();
 				if(price > maxPrice || price < 0) { // user entered number that was too large
 					throw new Exception();
@@ -265,11 +283,7 @@ public class BookDatabaseApp {
 		} while(inputError);
 		
 		return category; // only possible to get here if a valid category was entered
-		
-		
-		
 	}
 	
 	
-
 }
