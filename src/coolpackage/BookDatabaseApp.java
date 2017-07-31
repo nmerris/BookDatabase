@@ -318,6 +318,7 @@ public class BookDatabaseApp {
 				for(String s : Book.getAllCategories()) { // iterate through all possible categories
 					if(s.equalsIgnoreCase(category)) { // user entered a valid category
 						foundMatchingCategory = true;
+						category = s;
 					}
 				}
 				
