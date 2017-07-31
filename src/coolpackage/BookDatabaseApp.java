@@ -271,25 +271,22 @@ public class BookDatabaseApp {
 	 * @return validated price
 	 */
 	private static double getPriceFromUser(Scanner scanner, double maxPrice) {
-		boolean inputError; // true if user enters invalid input
 		double price = 0;
+		System.out.print("Enter price: $");
 		
-		do {
-			try { // get price and make sure it's a number not greater than maxPrice
-				inputError = false;
-				System.out.print("Enter price: $");
-				price = scanner.nextDouble();
-				if(price > maxPrice || price < 0) { // user entered number that was too large
-					throw new Exception();
-				}
-				scanner.nextLine(); // Scanner is kind of annoying
-				
-			} catch(Exception e) { // user did not enter a number
-				scanner.nextLine(); // consume the dangling \n or it loops forever
-				inputError = true;
-				System.out.printf("Please enter a positive number less than %.2f\n", maxPrice);
-			};
-		} while(inputError);
+		// first check to make sure user entered a number
+		while(!scanner.hasNextDouble()) {
+			System.out.printf("Please enter a positive number less than %.2f\n", maxPrice);
+			scanner.nextLine();
+		}
+		price = scanner.nextDouble();
+		
+		// now check that the number was in our defined range
+		while(price > maxPrice || price < 0) {
+			System.out.printf("Please enter a positive number less than %.2f\n", maxPrice);
+			price = scanner.nextDouble();
+			scanner.nextLine();
+		}
 		
 		return price;
 	}
@@ -318,7 +315,7 @@ public class BookDatabaseApp {
 				for(String s : Book.getAllCategories()) { // iterate through all possible categories
 					if(s.equalsIgnoreCase(category)) { // user entered a valid category
 						foundMatchingCategory = true;
-						category = s;
+						category = s; // want to use the nice looking categories defined in Book
 					}
 				}
 				
