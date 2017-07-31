@@ -185,6 +185,7 @@
 	TITLE: Thinking in Java
 	AUTHOR(S): Bruce Eckel
 	DESCRIPTION: Details about Java under the hood
+	CATEGORY: Nonfiction
 	PRICE: $20.00
 
 	MENU: (Enter one of the following numbers)
@@ -201,12 +202,14 @@
 	TITLE: Head First Java
 	AUTHOR(S): Kathy Sierra, Bert Bates
 	DESCRIPTION: Easy to read Java workbook
+	CATEGORY: Nonfiction
 	PRICE: $47.50
 	BOOK 2 DETAILS......
 	SKU: TestSku1000
 	TITLE: Test Title 1000
 	AUTHOR(S): Bert Bates, Bubba Gump
 	DESCRIPTION: Test description 1000
+	CATEGORY: Comedy
 	PRICE: $99.99
 
 	MENU: (Enter one of the following numbers)
@@ -225,18 +228,21 @@
 	TITLE: Head First Java
 	AUTHOR(S): Kathy Sierra, Bert Bates
 	DESCRIPTION: Easy to read Java workbook
+	CATEGORY: Nonfiction
 	PRICE: $47.50
 	BOOK 2 DETAILS......
 	SKU: Java1002
 	TITLE: Thinking in Java
 	AUTHOR(S): Bruce Eckel
 	DESCRIPTION: Details about Java under the hood
+	CATEGORY: Nonfiction
 	PRICE: $20.00
 	BOOK 3 DETAILS......
 	SKU: Rasp1006
 	TITLE: Raspberry Pi Projects for the Evil Genius
 	AUTHOR(S): Donald Norris
 	DESCRIPTION: A dozen fiendishly fun projects for the Raspberry Pi!
+	CATEGORY: Nonfiction
 	PRICE: $14.75
 
 	MENU: (Enter one of the following numbers)
@@ -269,6 +275,7 @@
 	TITLE: Test Title 2000
 	AUTHOR(S): Lt. Dan
 	DESCRIPTION: Shrimpin fun
+	CATEGORY: Romance
 	PRICE: $0.05
 
 	MENU: (Enter one of the following numbers)
