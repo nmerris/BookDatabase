@@ -8,7 +8,7 @@ import java.util.Scanner;
  * This program simulates a book database.  The user is presented with
  * a menu to add books, or look up book(s) by various criteria.
  * A book contains the following data: sku, author(s), title, description,
- * and price.
+ * category, and price.
  * 
  * @author Nathan Merris
  *
@@ -186,11 +186,12 @@ public class BookDatabaseApp {
 	 * @param b the book to display the details of
 	 */
 	public static void displayBookDetails(Book b) {
-		System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR(S): %s\nDESCRIPTION: %s\nPRICE: $%.2f\n",
+		System.out.printf("SKU: %s\nTITLE: %s\nAUTHOR(S): %s\nDESCRIPTION: %s\nCATEGORY: %s\nPRICE: $%.2f\n",
 				b.getSku(),
 				b.getTitle(),
 				b.getAuthorString(),
 				b.getDescription(),
+				b.getCategory(),
 				b.getPrice());
 	}
 	
