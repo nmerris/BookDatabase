@@ -271,7 +271,7 @@ public class BookDatabaseApp {
 	 * @return validated price
 	 */
 	private static double getPriceFromUser(Scanner scanner, double maxPrice) {
-		double price = 0;
+		double price;
 		System.out.print("Enter price: $");
 		
 		// first check to make sure user entered a number
@@ -320,12 +320,12 @@ public class BookDatabaseApp {
 				}
 				
 				if(!foundMatchingCategory) { // user did not enter a valid category
-					throw new Exception();
+					throw new InvalidCategoryException();
 				}
 				
-			} catch(Exception e) {
+			} catch(InvalidCategoryException e) {
 				inputError = true;
-				System.out.println("Please enter a category exactly as given");
+				System.out.println(e);
 			};
 		} while(inputError);
 		
